@@ -1,4 +1,4 @@
-package config;
+package jdniemin.spring_base.config;
 
 import java.util.List;
 import org.springframework.context.annotation.Bean;

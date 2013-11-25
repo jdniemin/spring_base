@@ -1,4 +1,4 @@
-package config;
+package jdniemin.spring_base.config;
 
 import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
