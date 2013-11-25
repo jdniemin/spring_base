@@ -8,24 +8,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
  * A dummy service for testing.
- * 
+ *
  * @author jdniemin
  */
-@Service
-@Qualifier("inMemoryItemService")
-public class InMemoryItemService implements ItemService{
-    
-    private final Map<Integer, Item> items = new HashMap<Integer, Item>();
+@Service(value="inMemoryItemService")
+public class InMemoryItemService implements ItemService {
+
+    private final Map<Long, Item> items = new HashMap<Long, Item>();
+    private long counter;
 
     @PostConstruct
     private void init() {
-        items.put(items.size(),  new Item(0L, "First item"));
-        items.put(items.size(), new Item(1L , "Second item"));
+        items.put(0L, new Item(0L, "First item"));
+        items.put(1L, new Item(1L, "Second item"));
+        counter = new Long(2);
     }
 
     @Override
@@ -35,25 +35,25 @@ public class InMemoryItemService implements ItemService{
 
     @Override
     public Item read(Long id) {
-        return items.get(id.intValue());
+        return items.get(id);
     }
 
     @Override
     public Item create(Item item) {
-        Integer nextVal = items.size();
-        item.setId(nextVal.longValue());
-        return items.put(nextVal, item);
+        item.setId(counter);
+        counter ++;
+        return items.put(item.getId(), item);
     }
 
     @Override
     public Item update(Long id, Item item) {
         item.setId(id);
-        return items.put(id.intValue(), item);
+        return items.put(item.getId(), item);
     }
 
     @Override
     public Item delete(Long id) {
-        return items.remove(id.intValue());
+        return items.remove(id);
     }
-    
+
 }

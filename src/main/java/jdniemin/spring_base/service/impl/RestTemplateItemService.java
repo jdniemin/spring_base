@@ -14,8 +14,7 @@ import org.springframework.web.client.RestTemplate;
  * 
  * @author jdniemin
  */
-@Service
-@Qualifier("restTemplateItemService")    
+@Service(value="restTemplateItemService")
 public class RestTemplateItemService implements ItemService {
 
     private RestTemplate restTemplate;
